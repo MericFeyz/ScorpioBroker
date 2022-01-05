@@ -36,7 +36,7 @@ spring:
   datasource:
     url: jdbc:postgresql://${POSTGRES_SERVICE}:${POSTGRES_PORT}/ngb?ApplicationName=ngb_registrymanager
     username: ngb
-    password: ngb
+    password: ${POSTGRES_PASSWORD}
     hikari: 
       minimumIdle: 5
       maximumPoolSize: 20
@@ -50,7 +50,7 @@ reader:
   datasource:
     url: "jdbc:postgresql://${POSTGRES_SERVICE}:${POSTGRES_PORT}/ngb?ApplicationName=ngb_storagemanager_reader"
     username: ngb
-    password: ngb
+    password: ${POSTGRES_PASSWORD}
     hikari:
       minimumIdle: 5
       maximumPoolSize: 20
@@ -64,7 +64,7 @@ writer:
   datasource:
     url: "jdbc:postgresql://${POSTGRES_SERVICE}:${POSTGRES_PORT}/ngb?ApplicationName=ngb_storagemanager_writer"
     username: ngb
-    password: ngb
+    password: ${POSTGRES_PASSWORD}
     hikari:
       minimumIdle: 5
       maximumPoolSize: 20

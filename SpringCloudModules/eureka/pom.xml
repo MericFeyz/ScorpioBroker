@@ -15,7 +15,7 @@
 		<version>1.0.0-SNAPSHOT</version>
 		<relativePath>../../SpringCloudParent</relativePath>
 	</parent>
-	<version>2.0.0-SNAPSHOT</version>
+	<version>3.0.0-SNAPSHOT</version>
 	<profiles>
 		<profile>
 			<id>java-above-8-support</id>

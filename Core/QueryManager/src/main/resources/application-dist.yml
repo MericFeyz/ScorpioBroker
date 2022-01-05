@@ -25,7 +25,7 @@ spring:
   datasource:
     url: jdbc:postgresql://${POSTGRES_SERVICE}:${POSTGRES_PORT}/ngb?ApplicationName=ngb_querymanager
     username: ngb
-    password: ngb
+    password: ${POSTGRES_PASSWORD}
     hikari: 
       minimumIdle: 5
       maximumPoolSize: 20

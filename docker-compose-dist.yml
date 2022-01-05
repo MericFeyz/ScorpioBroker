@@ -25,7 +25,7 @@ services:
       POSTGRES_PASSWORD: ngb
       POSTGRES_DB: ngb
   atctxsrv:
-    image: ibn40/digitaltwin:AtContextServer_2.0.0-SNAPSHOT
+    image: ibn40/digitaltwin:AtContextServer_3.0.0-SNAPSHOT
     ports:
       - "27015"
     env_file:
@@ -34,13 +34,13 @@ services:
       - kafka
       - eureka
   cfgsrv:
-    image: ibn40/digitaltwin:config-server_2.0.0-SNAPSHOT
+    image: ibn40/digitaltwin:config-server_3.0.0-SNAPSHOT
     ports:
       - "8888"
     depends_on:
       - eureka
   emgr:
-    image: ibn40/digitaltwin:EntityManager_2.0.0-SNAPSHOT
+    image: ibn40/digitaltwin:EntityManager_3.0.0-SNAPSHOT
     ports:
       - "1025"
     env_file:
@@ -48,17 +48,18 @@ services:
     environment:
       - CLIENT_ID=entity-manager
       - CLIENT_SECRET=
+      - POSTGRES_PASSWORD=ngb
     depends_on:
       - kafka
       - eureka
   eureka:
-    image: ibn40/digitaltwin:eureka-server_2.0.0-SNAPSHOT
+    image: ibn40/digitaltwin:eureka-server_3.0.0-SNAPSHOT
     ports:
       - "8761"
     env_file:
       - platform_services.env
   gateway:
-    image: ibn40/digitaltwin:gateway_2.0.0-SNAPSHOT
+    image: ibn40/digitaltwin:gateway_3.0.0-SNAPSHOT
     ports:
       - "9090:9090"
     env_file:
@@ -66,7 +67,7 @@ services:
     depends_on:
       - eureka
   histmgr:
-    image: ibn40/digitaltwin:HistoryManager_2.0.0-SNAPSHOT
+    image: ibn40/digitaltwin:HistoryManager_3.0.0-SNAPSHOT
     ports:
       - "1040"
     env_file:
@@ -74,12 +75,13 @@ services:
     environment:
       - CLIENT_ID=history-manager
       - CLIENT_SECRET=
+      - POSTGRES_PASSWORD=ngb
     depends_on:
       - kafka
       - gateway
       - eureka
   qrymgr:
-    image: ibn40/digitaltwin:QueryManager_2.0.0-SNAPSHOT
+    image: ibn40/digitaltwin:QueryManager_3.0.0-SNAPSHOT
     ports:
       - "1026"
     env_file:
@@ -87,12 +89,13 @@ services:
     environment:
       - CLIENT_ID=query-manager
       - CLIENT_SECRET=
+      - POSTGRES_PASSWORD=ngb
     depends_on:
       - kafka
       - postgres
       - eureka
   regmgr:
-    image: ibn40/digitaltwin:RegistryManager_2.0.0-SNAPSHOT
+    image: ibn40/digitaltwin:RegistryManager_3.0.0-SNAPSHOT
     ports:
       - "1030"
     env_file:
@@ -100,23 +103,26 @@ services:
     environment:
       - CLIENT_ID=registry-manager
       - CLIENT_SECRET=
+      - POSTGRES_PASSWORD=ngb
     depends_on:
       - kafka
       - postgres
       - gateway
       - eureka
   stomgr:
-    image: ibn40/digitaltwin:StorageManager_2.0.0-SNAPSHOT
+    image: ibn40/digitaltwin:StorageManager_3.0.0-SNAPSHOT
     ports:
       - "1029"
     env_file:
       - platform_services.env
+    environment:
+      - POSTGRES_PASSWORD=ngb
     depends_on:
       - kafka
       - postgres
       - eureka
   sbsmgr:
-    image: ibn40/digitaltwin:SubscriptionManager_2.0.0-SNAPSHOT
+    image: ibn40/digitaltwin:SubscriptionManager_3.0.0-SNAPSHOT
     ports:
       - "2025"
     env_file:
@@ -124,6 +130,7 @@ services:
     environment:
       - CLIENT_ID=subscription-manager
       - CLIENT_SECRET=
+      - POSTGRES_PASSWORD=ngb
     depends_on:
       - kafka
       - eureka

@@ -2,9 +2,10 @@ FROM openjdk:11-jre
 
 #Run as non-root user
 RUN useradd scorpio
+WORKDIR /usr/src/scorpio
+RUN chmod o+rw .
 USER scorpio
 
-WORKDIR /usr/src/scorpio
 ARG JAR_FILE_BUILD
 ARG JAR_FILE_RUN
 ENV JAR_FILE_RUN ${JAR_FILE_RUN}
