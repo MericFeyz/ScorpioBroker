@@ -4,6 +4,7 @@ import java.time.LocalDateTime;
 import java.util.List;
 import java.util.Map;
 import javax.annotation.PostConstruct;
+import javax.annotation.security.RolesAllowed;
 import javax.inject.Inject;
 import javax.inject.Singleton;
 import javax.ws.rs.DELETE;
@@ -71,6 +72,7 @@ public class EntityController {// implements EntityHandlerInterface {
 	 */
 	@Path("/entities")
 	@POST
+	@RolesAllowed({"Factory-Admin", "Factory-Writer"})
 	public Uni<RestResponse<Object>> createEntity(HttpServerRequest req, String payload) {
 		return EntryControllerFunctions.createEntry(entityService, req, payload, AppConstants.ENTITY_CREATE_PAYLOAD,
 				AppConstants.ENTITES_URL, logger);
@@ -86,6 +88,7 @@ public class EntityController {// implements EntityHandlerInterface {
 
 	@PATCH
 	@Path("/entities/{entityId}/attrs")
+	@RolesAllowed({"Factory-Admin", "Factory-Editor", "Factory-Writer"})
 	public Uni<RestResponse<Object>> updateEntity(HttpServerRequest request, @PathParam("entityId") String entityId,
 			String payload) {
 		return EntryControllerFunctions.updateEntry(entityService, request, entityId, payload,
@@ -102,6 +105,7 @@ public class EntityController {// implements EntityHandlerInterface {
 
 	@POST
 	@Path("/entities/{entityId}/attrs")
+	@RolesAllowed({"Factory-Admin", "Factory-Writer"})
 	public Uni<RestResponse<Object>> appendEntity(HttpServerRequest request, @PathParam("entityId") String entityId,
 			String payload, @QueryParam("options") String options) {
 		return EntryControllerFunctions.appendToEntry(entityService, request, entityId, payload, options,
@@ -120,6 +124,7 @@ public class EntityController {// implements EntityHandlerInterface {
 	@SuppressWarnings({ "unchecked", "static-access" })
 	@PATCH
 	@Path("/entities/{entityId}/attrs/{attrId}")
+	@RolesAllowed({"Factory-Admin", "Factory-Editor", "Factory-Writer"})
 	public Uni<RestResponse<Object>> partialUpdateEntity(HttpServerRequest request,
 			@PathParam("entityId") String entityId, @PathParam("attrId") String attrId, String payload) {
 
@@ -175,6 +180,7 @@ public class EntityController {// implements EntityHandlerInterface {
 
 	@DELETE
 	@Path("/entities/{entityId}/attrs/{attrId}")
+	@RolesAllowed("Factory-Admin")
 	public Uni<RestResponse<Object>> deleteAttribute(HttpServerRequest request, @PathParam("entityId") String entityId,
 			@PathParam("attrId") String attrId, @QueryParam("datasetId") String datasetId,
 			@QueryParam("deleteAll") String deleteAll) {
